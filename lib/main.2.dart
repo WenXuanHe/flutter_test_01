@@ -16,12 +16,14 @@ void main() => runApp(new MyApp());
 // 常用布局widgets  
 // Expanded flex
 // Container ： 添加 padding, margins, borders, background color, 或将其他装饰添加到widget.
-// GridView： 将 widgets 排列为可滚动的网格.
+// GridView： 将 widgets 排列为可滚动的网格 grid布局类似.
 // ListView 将widget排列为可滚动列表
 // Stack 将widget重叠在另一个widget之上.
 // Card 将相关内容放到带圆角和投影的盒子中
 // ListTile 将最多3行文字，以及可选的行前和和行尾的图标排成一行
 // 这种形式可以代表一个数组列表
+// InkWell 可以添加水波纹效果， 自带ontap事件
+// Stack  可以定位， 在使用的时候注意要给它添加一个固定的区域，如果不添加，就有可能出现超出当前区域的错误。
 // <Widget>[
 //   new IconButton(),
 //   new Expanded()
