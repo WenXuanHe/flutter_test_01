@@ -28,6 +28,10 @@ void main() => runApp(new MyApp());
 //   new IconButton(),
 //   new Expanded()
 // ]
+// 加边框： Container =》 decoration
+ // decoration: new BoxDecoration(
+  //   border: new Border.all(color: Colors.red)
+  // ),
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
