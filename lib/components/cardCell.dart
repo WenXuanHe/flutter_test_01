@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../model/userInfo.dart';
 
 class CardCellTip extends StatelessWidget {
   CardCellTip(this.orderId, this.statusDisplay) {
@@ -133,7 +134,7 @@ class CardCell extends StatefulWidget {
     cardInfo = cardInfo;
   }
 
-  dynamic cardInfo;
+  Map<String, dynamic> cardInfo;
 
   @override
   createState() => new CardCellState(cardInfo);
@@ -143,21 +144,27 @@ class CardCellState extends State<CardCell> {
   CardCellState(this.cardInfo) {
     cardInfo = cardInfo;
   }
-  dynamic cardInfo;
-  @override
-  Widget build(BuildContext context) {
-    var now = new DateTime.fromMicrosecondsSinceEpoch(1552043351 * 1000 * 1000);
+  Map<String, dynamic> cardInfo;
+  var user;
+  
+  String formatTime(num time){
+    var now = new DateTime.fromMicrosecondsSinceEpoch(time * 1000 * 1000);
     var formatter = new DateFormat('yyyy-MM-dd');
     String formatted = formatter.format(now);
+    return formatted;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var user = new UserInfo.fromJson(cardInfo);
     return new Container(
       color: Color(0xFFFFFFFFFF),
       margin: EdgeInsets.only(top: 10, bottom: 10),
       child: new Column(
         children: <Widget>[
-          new CardCellTip("1627435408307213", "待支付意向金"),
-          new CardCellBody(
-              "65de0000c98765246de7", "18611189509", "李孟齐", "科沃兹 2019款 320 自动欣"),
-          new CardCellFooter(formatted, "何文轩"),
+          new CardCellTip(user.orderId, user.statusDisplay),
+          new CardCellBody(user.imageUrl, user.phone, user.customerName, user.goodsName),
+          new CardCellFooter(formatTime(user.createdTime), user.userName),
         ],
       )
     );
