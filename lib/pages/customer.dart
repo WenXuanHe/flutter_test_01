@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:event_bus/event_bus.dart';
+import 'package:camera/camera.dart';
+
 import '../components/search.dart';
 import '../components/cardCell.dart';
 import '../components/peopleSelect.dart';
 import '../animations/fadeInRight.dart';
+
+EventBus eventBus = new EventBus();
+List<CameraDescription> cameras;
 
 class CustomerPage extends StatefulWidget {
   @override
@@ -13,21 +19,39 @@ class CustomerPage extends StatefulWidget {
 class _CustomerPageState extends State<CustomerPage>
     with TickerProviderStateMixin {
   TabController _tabController;
-   Animation<double> animation;
+  Animation<double> animation;
   AnimationController controller;
   List tabs = ["新闻", "历史", "图片"];
 
   @override
-  void initState() {
+  void initState () {
     super.initState();
     // 创建Controller
     _tabController = TabController(length: tabs.length, vsync: this);
-     //使用弹性曲线
-    controller =  new AnimationController( duration: const Duration(seconds: 1), vsync: this);
+    //使用弹性曲线
+    controller = new AnimationController(
+        duration: const Duration(seconds: 1), vsync: this);
     //图片宽高从0变到300
     animation = new Tween(begin: -200.0, end: 0.0).animate(controller);
     //启动动画
     controller.forward();
+    availableCameras().then((cameraList){
+      cameras = cameraList;
+    });
+    eventBus.on().listen((event) {
+      print("eventBus");
+      CameraController cameraController;
+      if(cameras.length > 0){
+        cameraController = CameraController(cameras[0], ResolutionPreset.medium);
+      }
+      
+      cameraController.initialize().then((_) {
+        if (!mounted) {
+          return;
+        }
+        setState(() {});
+      });
+    });
   }
 
   @override
@@ -74,6 +98,17 @@ class _CustomerPageState extends State<CustomerPage>
                     child: new Center(
                       child: new Text("dddd"),
                     ),
+                  ),
+                  new RaisedButton(
+                    child: const Text('Connect with Twitter'),
+                    color: Theme.of(context).accentColor,
+                    elevation: 4.0,
+                    splashColor: Colors.blueGrey,
+                    onPressed: () {
+                      // Perform some action
+                      print("----click1----");
+                      eventBus.fire("click");
+                    },
                   ),
                 ],
               ),

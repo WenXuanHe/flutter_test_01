@@ -78,6 +78,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.2.0"
+  camera:
+    dependency: "direct main"
+    description:
+      name: camera
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.4.2"
   charcode:
     dependency: transitive
     description:
@@ -162,6 +169,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.5"
+  event_bus:
+    dependency: "direct main"
+    description:
+      name: event_bus
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3"
   fixnum:
     dependency: transitive
     description:
@@ -438,3 +452,4 @@ packages:
     version: "2.1.15"
 sdks:
   dart: ">=2.0.0 <3.0.0"
+  flutter: ">=0.1.4 <2.0.0"

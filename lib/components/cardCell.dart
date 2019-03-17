@@ -47,6 +47,7 @@ class CardCellFooter extends StatelessWidget {
   }
   String formatted;
   String admin;
+
   @override
   Widget build(BuildContext context) {
     return new Container(

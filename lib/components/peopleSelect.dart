@@ -27,7 +27,6 @@ class PeopleSelectState extends State<PeopleSelect> {
   Widget build(BuildContext context) {
     return new Column(
       children: <Widget>[
-        new Text('负责人'),
         new Container(
           height: 200,
           width: 200,
