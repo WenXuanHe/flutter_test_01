@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:event_bus/event_bus.dart';
-import 'package:camera/camera.dart';
 
 import '../components/search.dart';
 import '../components/cardCell.dart';
@@ -8,7 +7,6 @@ import '../components/peopleSelect.dart';
 import '../animations/fadeInRight.dart';
 
 EventBus eventBus = new EventBus();
-List<CameraDescription> cameras;
 
 class CustomerPage extends StatefulWidget {
   @override
@@ -35,22 +33,8 @@ class _CustomerPageState extends State<CustomerPage>
     animation = new Tween(begin: -200.0, end: 0.0).animate(controller);
     //启动动画
     controller.forward();
-    availableCameras().then((cameraList){
-      cameras = cameraList;
-    });
     eventBus.on().listen((event) {
       print("eventBus");
-      CameraController cameraController;
-      if(cameras.length > 0){
-        cameraController = CameraController(cameras[0], ResolutionPreset.medium);
-      }
-      
-      cameraController.initialize().then((_) {
-        if (!mounted) {
-          return;
-        }
-        setState(() {});
-      });
     });
   }
 
